@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuaca</title>
+    <link rel="stylesheet" href="styleDC.css">
+</head>
+<style>
+    body{
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200vh;
+}
+
+.iphone {
+  width: 375px; /* Lebar iPhone */
+  height: 610px; /* Tinggi iPhone */
+  border: 14px solid #000; /* Bingkai hitam */
+  border-radius: 36px; /* Sudut melengkung */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Bayangan */
+  position: relative;
+  background-color: #002b06; /* Warna latar belakang */
+  overflow: hidden; /* Menjaga konten tetap dalam bingkai */
+}
+
+.camera {
+  width: 12px; /* Lebar kamera */
+  height: 12px; /* Tinggi kamera */
+  background-color: #000; /* Warna kamera */
+  border-radius: 50%; /* Membuatnya bulat */
+  position: absolute;
+  top: 15px; /* Posisi dari atas */
+  left: calc(50% - 6px); /* Tengah secara horizontal */
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  margin-left: 5px;
+  position: relative;
+  padding-top: 30px; /* Memberi ruang untuk kamera */
+  background-image: url(GambarTP.png);
+  background-position: right bottom;
+  background-size: 98%;
+  background-repeat: no-repeat;
+  z-index: 1;
+  }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;    
+  margin: 20px auto;
+  z-index: 2;
+  background-image: url(GambarDaun3.png);
+  background-size: 55%;
+  background-repeat: no-repeat;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+  
+.back-button {
+  background: none;
+  border: none;
+  font-size: 15px;
+  color: white;
+  font-family: Monserrat;
+  border: 0.5px solid transparent;
+  padding: 10px 15px;
+  border-radius: 60px;
+  transition: transform .4s;
+  cursor: pointer;
+}
+  
+.back-button:hover {
+  transform: scale(1.1);
+}
+
+.notification-icon {
+  font-size: 20px;
+  background-color: #002b06;
+  background: #002b06;
+  border: 0.5px solid transparent;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: transform .4s;
+  cursor: pointer;
+}
+  
+.notification-icon:hover {
+  transform: scale(1.1);
+}
+  
+  
+.containmenu {
+  width: 100%;
+  height: 0;
+}
+  
+.menu {
+  width: 100%;
+  background-color: #0d771b;
+  position: sticky;
+  margin-top: 20px;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(230%);
+  z-index: 1;
+  border-radius: 20px;
+}
+  
+.menu.open {
+  transform: translateX(80%);
+}
+  
+.menu-toggle {
+  background-color: #002b06;
+  color: #fff;
+  border: 0.5px solid transparent;
+  padding: 10px 15px;
+  border-radius: 20px;
+  transition: transform .4s;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+  
+.menu-items {
+  padding: 20px;
+}
+  
+.menu-items a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #fff;
+}
+
+h2 {
+  color: white;
+  font-family: sans-serif;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  margin-left: -40px;
+  font-size: 13px;
+}
+
+.search-input {
+  display: flex; /* Menggunakan Flexbox */
+  align-items: center; /* Vertically center the items */
+  margin-top: 5px; /* Jarak atas jika diperlukan */
+}
+
+.search1 {
+  padding: 10px;
+  flex: 1; /* Make the input take available space */
+  border: none;
+  border-radius: 5px;
+  width: 70%;
+  height: 10px;
+  margin-top: 0px;
+}
+
+.getWeather {
+  background-color: #4CAF50; /* Hijau */
+  padding: 15px 15px;
+  margin-left: 5px; /* Space between input and button */
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-image: url(SearchIcon.png);
+  background-size: cover;
+}
+
+.getWeather:hover {
+  background-color: #126603; /* Darker shade on hover */
+  transition: 1s;
+}
+
+#weather {
+  width: 80%;
+  margin-top: 60px;
+  margin-left: 0px;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+}
+
+#weather h2 {
+  color: black;
+  text-align: left;
+  margin-left: 20px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+#weather p {
+  margin-left: 20px;
+  color: #126603;
+}
+
+#weather p:nth-child(even) {
+  background-color: white; /* Abu-abu muda */
+  border-radius: 10px;
+}
+</style>
+<body>
+    <div class="iphone">
+        <div class="camera"></div> <!-- Elemen kamera -->
+        <div class="screen">
+            <div class="container">
+                <div class="header">
+                  <div class="containmenu">
+                    <div class="menu">
+                      <div class="menu-items">
+                        <a href="#">About</a>
+                        <a href="#">Contact</a>
+                        <a href="#">FAQ</a>
+                      </div> 
+                    </div>
+                </div>
+                  <a href="HomeScreen.html">
+                    <button class="back-button">Back</button>
+                  </a>
+                  <a href="Notification.html">
+                    <button class="notification-icon">🔔</button>
+                  </a>
+                  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+                </div>
+                    <h2>How's the weather today?</h2>  
+                    <div class="search-input">
+                    <input class="search1" type="text" id="city" placeholder="Enter the city name.." />
+                <button class="getWeather" id="getWeather"></button>
+            </div>
+                <div id="weather"></div>
+        </div>
+    </div>    
+
+    <script>
+        const API_KEY = '1d3522358876f6a9b107ac7ab8cdb472'; // Ganti dengan API key Anda sendiri
+        const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
+
+        document.getElementById('getWeather').addEventListener('click', async () => {
+            const cityName = document.getElementById('city').value;
+            const params = new URLSearchParams({
+                q: cityName,
+                appid: API_KEY,
+                units: 'metric' // Menggunakan Celsius
+            });
+
+            try {
+                const response = await fetch(`${BASE_URL}?${params}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    const weatherInfo = `
+                        <h2> Weather at ${data.name}</h2>
+                        <p>Temperature  : ${data.main.temp}°C</p>
+                        <p>Humidity     : ${data.main.humidity}%</p>
+                        <p>Description  : ${data.weather[0].description}</p>
+                        <p>Wind speed   : ${data.wind.speed} m/s</p>
+                        <p>Date         : ${new Date().toLocaleString()}</p>
+                    `;
+                    document.getElementById('weather').innerHTML = weatherInfo;
+                } else {
+                    throw new Error('Gagal mengambil data cuaca');
+                }
+            } catch (error) {
+                document.getElementById('weather').innerHTML = `<p style="color: red;">${error.message}</p>`;
+            }
+        });
+    </script>
+        <script>
+            function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            const content = document.querySelector('.content');
+            menu.classList.toggle('open');
+            content.classList.toggle('open');
+          }
+          </script>
+</body>
+</html>

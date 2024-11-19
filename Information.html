@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi Tanaman</title>
+    <link rel="stylesheet" href="styleINF.css">
+    </style>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200vh;
+}
+
+.iphone {
+    width: 375px; /* Lebar iPhone */
+    height: 610px; /* Tinggi iPhone */
+    border: 14px solid #000; /* Bingkai hitam */
+    border-radius: 36px; /* Sudut melengkung */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Bayangan */
+    position: relative;
+    background-color: #002b06; /* Warna latar belakang */
+    overflow: hidden; /* Menjaga konten tetap dalam bingkai */
+}
+
+.camera {
+    width: 12px; /* Lebar kamera */
+    height: 12px; /* Tinggi kamera */
+    background-color: #000; /* Warna kamera */
+    border-radius: 50%; /* Membuatnya bulat */
+    position: absolute;
+    top: 15px; /* Posisi dari atas */
+    left: calc(50% - 6px); /* Tengah secara horizontal */
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    margin-left: 5px;
+    position: relative;
+    padding-top: 30px; /* Memberi ruang untuk kamera */
+    background-image: url(GambarTP.png);
+    background-position: right bottom;
+    background-size: 98%;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+    background-color: #3e8e41;
+    color: white;
+    margin: 0;   
+}
+
+h2 {
+    color: #3e8e41;
+    }
+
+label { 
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 50%;
+    height: 10px;
+    margin-right: 10px;
+    border: 2px solid #3e8e41;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.search-input{
+    background-color: #4CAF50; /* Hijau */
+    padding: 15px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-image: url(SearchIcon.png);
+    background-size: cover;
+    margin-top: 0px;
+}
+
+.nyari {
+    text-align: center; 
+    margin-top: 30px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;    
+    margin: 20px auto;
+    z-index: 2;
+    background-size: 55%;
+    background-repeat: no-repeat;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: -10px;
+  }
+    
+  .back-button {
+    background: none;
+    border: none;
+    font-size: 15px;
+    color: white;
+    font-family: Monserrat;
+    border: 0.5px solid transparent;
+    padding: 10px 15px;
+    border-radius: 60px;
+    transition: transform .4s;
+    cursor: pointer;
+    margin-top: 1px;
+  }
+    
+  .back-button:hover {
+    transform: scale(1.1);
+  }
+  
+  .notification-icon {
+    font-size: 20px;
+    background-color: #002b06;
+    background: #002b06;
+    border: 0.5px solid transparent;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: transform .4s;
+    cursor: pointer;
+  }
+  .notification-icon:hover {
+    transform: scale(1.1);
+  }
+  .containmenu {
+    width: 100%;
+    height: 0;
+  }
+  .menu {
+    width: 100%;
+    background-color: #0d771b;
+    position: sticky;
+    margin-top: 20px;
+    transition: transform 0.5s ease-in-out;
+    transform: translateX(230%);
+    z-index: 1;
+    border-radius: 20px;
+  }
+    
+  .menu.open {
+    transform: translateX(80%);
+  }
+    
+  .menu-toggle {
+    background-color: #002b06;
+    color: #fff;
+    border: 0.5px solid transparent;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: transform .4s;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .menu-toggle:hover {
+    transform: scale(1.1);
+  }
+    
+  .menu-items {
+    padding: 20px;
+  }
+    
+  .menu-items a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+  }
+
+.result {
+    position: absolute; /* Mengubah menjadi absolute */
+    top: 260px; /* Jarak dari atas */
+    left: 50%; /* Tengah secara horizontal */
+    transform: translateX(-50%); /* Menggeser elemen ke kiri setengah lebar untuk benar-benar tengah */
+    margin: 10; /* Menghapus margin untuk posisi yang lebih baik */
+    border: 2px solid #4CAF50;
+    padding: 15px;
+    width: 75%;
+    background-color: #e8f5e9;
+    border-radius: 8px;
+    display: none; /* Masih tetap tersembunyi sampai ditampilkan */
+}
+.result p {
+    font-size: 13px;
+    line-height: 1;
+    margin-bottom: 5px;
+    text-align:left;
+}
+
+.result h2 {
+    font-size: 24px;
+    margin-top: 1px;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+</style>
+<body>
+    <div class="iphone">
+        <div class="camera"></div> <!-- Elemen kamera -->
+        <div class="screen">
+
+        <div class="container">
+            <div class="header">
+              <div class="containmenu">
+                <div class="menu">
+                  <div class="menu-items">
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                    <a href="#">FAQ</a>
+                  </div> 
+                </div>
+            </div>
+              <a href="HomeScreen.html">
+                <button class="back-button">Back</button>
+              </a>
+              <a href="Notification.html">
+                <button class="notification-icon">🔔</button>
+              </a>
+              <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            </div>
+
+        <div class="nyari">
+            <label for="plant">Suitable Plant Type?? </label>
+            <input type="text" id="plant" placeholder="Enter the plant name">
+            <button class="search-input" onclick="showInfo()"></button>
+        </div>
+    </div>
+    
+    <div id="resultPadi" class="result">
+        <h2>Rice</h2>
+        <p><strong>Soil Moisture:</strong> 80-100% field capacity</p>
+        <p><strong>Soil Temperature:</strong> 20-35°C</p>
+        <p><strong>Water Content:</strong> High (wet land that is always irrigated)</p>
+        <p><strong>Light Intensity:</strong> 30,000-50,000 lux</p>
+        <p><strong>Soil pH:</strong> 5.5-7.0</p>
+        <p><strong>Soil Structure:</strong> Clay or sandy loam</p>
+        <p><strong>Soil Organic Matter Content:</strong> 3-4% organic matter</p>
+    </div>
+
+    <div id="resultJagung" class="result">
+        <h2>Corn</h2>
+        <p><strong>Soil Moisture:</strong> 50-70% field capacity</p>
+        <p><strong>Soil Temperature:</strong> 18-27°C</p>
+        <p><strong>Water Content:</strong> 15-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-35,000 lux</p>
+        <p><strong>Soil pH:</strong> 5.8-7.0</p>
+        <p><strong>Soil Structure:</strong> Sandy loam with good drainage</p>
+        <p><strong>Soil Organic Matter Content:</strong> 2-3% organic matter</p>
+    </div>
+
+    <div id="resultKedelai" class="result">
+        <h2>Soybean</h2>
+        <p><strong>Soil Moisture:</strong> 60-70% field capacity</p>
+        <p><strong>Soil Temperature:</strong> 20-30°C</p>
+        <p><strong>Water Content:</strong> 15-20% available water content</p>
+        <p><strong>Light Intensity:</strong> 20,000-30,000 lux</p>
+        <p><strong>Soil pH:</strong> 6.0-7.0</p>
+        <p><strong>Soil Structure:</strong> Sandy loam soil</p>
+        <p><strong>Soil Organic Matter Content:</strong> 2-3% organic matter</p>
+    </div>
+
+    <div id="resultTebu" class="result">
+        <h2>Sugarcane</h2>
+        <p><strong>Soil Moisture:</strong> 70-90% field capacity</p>
+        <p><strong>Soil Temperature:</strong> 20-35°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 5.5-8.0</p>
+        <p><strong>Soil Structure:</strong> Sandy loam with good drainage</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <div id="resultSawit" class="result">
+        <h2>Oil Palm</h2>
+        <p><strong>Soil Moisture:</strong> 60-80% field capacity</p>
+        <p><strong>Soil Temperature:</strong> 25-30°C</p>
+        <p><strong>Water Content:</strong> 20-30% available water content</p>
+        <p><strong>Light Intensity:</strong> 20,000-30,000 lux</p>
+        <p><strong>Soil pH:</strong> 4.0-6.0</p>
+        <p><strong>Soil Structure:</strong> From clay loam to clay soil</p>
+        <p><strong>Soil Organic Matter Content:</strong> 3-5% organic matter</p>
+    </div>
+
+    <div id="resultTembakau" class="result">
+        <h2>Tobacco</h2>
+        <p><strong>Soil Moisture:</strong> 60-70% field capacity</p>
+        <p><strong>Soil Temperature:</strong> 20-30°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 5.5-6.5</p>
+        <p><strong>Soil Structure:</strong> Sandy loam with good drainage</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <div id="resultSawi" class="result">
+        <h2>Mustard Greens</h2>
+        <p><strong>Soil Moisture:</strong> 60-70% field capacity</p>
+        <p><strong>Soil Temperature:</strong> 18-24°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 6-6.8</p>
+        <p><strong>Soil Structure:</strong> Sandy loam with good drainage</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <div id="resultCabai" class="result">
+        <h2>Chilli Pepper</h2>
+        <p><strong>Soil Moisture:</strong> 60-80% field capacity</p>
+        <p><strong>Soil Temperature:</strong> 16-32°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 5.5-7</p>
+        <p><strong>Soil Structure:</strong> Sandy loam with good drainage</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <div id="resultTomat" class="result">
+        <h2>Tomato</h2>
+        <p><strong>Soil Moisture:</strong> Moderate, avoid waterlogging</p>
+        <p><strong>Soil Temperature:</strong> 20-27°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 5.5-7.5</p>
+        <p><strong>Soil Structure:</strong> Loamy and fertile</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <div id="resultKopi" class="result">
+        <h2>Coffee</h2>
+        <p><strong>Soil Moisture:</strong> Stable, not too wet or dry</p>
+        <p><strong>Soil Temperature:</strong> 18-28°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 5-6.5</p>
+        <p><strong>Soil Structure:</strong> Fertile with good drainage</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <div id="resultKakao" class="result">
+        <h2>Cocoa</h2>
+        <p><strong>Soil Moisture:</strong> High, but soil must have good drainage</p>
+        <p><strong>Soil Temperature:</strong> 22-30°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 5-6</p>
+        <p><strong>Soil Structure:</strong> Loamy</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <div id="resultBawangMerah" class="result">
+        <h2>Red Onion</h2>
+        <p><strong>Soil Moisture:</strong> Stable, not too wet</p>
+        <p><strong>Soil Temperature:</strong> 25-32°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 5.5-7</p>
+        <p><strong>Soil Structure:</strong> Loamy and light</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <div id="resultBawangPutih" class="result">
+        <h2>Garlic</h2>
+        <p><strong>Soil Moisture:</strong> Moderate with good drainage</p>
+        <p><strong>Soil Temperature:</strong> 20-25°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 6-7.5</p>
+        <p><strong>Soil Structure:</strong> Fertile and light</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <div id="resultJeruk" class="result">
+        <h2>Orange</h2>
+        <p><strong>Soil Moisture :</strong> Moderately moist, but free from waterlogging</p>
+        <p><strong>Soil Temperature:</strong> 25-30°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 5.5-6.5</p>
+        <p><strong>Soil Structure:</strong> Loamy and fertile</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <div id="resultKentang" class="result">
+        <h2>Potato</h2>
+        <p><strong>Soil Moisture:</strong> Stable, avoid waterlogging</p>
+        <p><strong>Soil Temperature:</strong> 18-20°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 5.5-6</p>
+        <p><strong>Soil Structure:</strong> Loamy and crumbly</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <div id="resultKetela" class="result">
+        <h2>Yam</h2>
+        <p><strong>Soil Moisture:</strong> Stable with good drainage</p>
+        <p><strong>Soil Temperature:</strong> 20-30°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 5.5-6.5</p>
+        <p><strong>Soil Structure:</strong> Loamy</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <div id="resultPepaya" class="result">
+        <h2>Papaya</h2>
+        <p><strong>Soil Moisture:</strong> Moderate, not too wet</p>
+        <p><strong>Soil Temperature:</strong> 22-30°C</p>
+        <p><strong>Water Content:</strong> 20-25% available water content</p>
+        <p><strong>Light Intensity:</strong> 25,000-40,000 lux</p>
+        <p><strong>Soil pH:</strong> 6-7</p>
+        <p><strong>Soil Structure:</strong> Fertile with good drainage</p>
+        <p><strong>Soil Organic Matter Content:</strong> 1.5-2.5% organic matter</p>
+    </div>
+
+    <script>
+        function showInfo() {
+            const plant = document.getElementById("plant").value.toLowerCase();
+            
+            document.getElementById("resultPadi").style.display = "none";
+            document.getElementById("resultJagung").style.display = "none";
+            document.getElementById("resultKedelai").style.display = "none";
+            document.getElementById("resultTebu").style.display = "none";
+            document.getElementById("resultSawit").style.display = "none";
+            document.getElementById("resultTembakau").style.display = "none";
+            document.getElementById("resultSawi").style.display = "none";
+            document.getElementById("resultCabai").style.display = "none";
+            document.getElementById("resultTomat").style.display = "none";
+            document.getElementById("resultKopi").style.display = "none";
+            document.getElementById("resultKakao").style.display = "none";
+            document.getElementById("resultBawangMerah").style.display = "none";
+            document.getElementById("resultBawangPutih").style.display = "none";
+            document.getElementById("resultJeruk").style.display = "none";
+            document.getElementById("resultKentang").style.display = "none";
+            document.getElementById("resultKetela").style.display = "none";
+            document.getElementById("resultPepaya").style.display = "none";
+            
+            if (plant === "padi") {
+                document.getElementById("resultPadi").style.display = "block";
+            } else if (plant === "jagung") {
+                document.getElementById("resultJagung").style.display = "block";
+            } else if (plant === "kedelai") {
+                document.getElementById("resultKedelai").style.display = "block";
+            } else if (plant === "tebu") {
+                document.getElementById("resultTebu").style.display = "block";
+            } else if (plant === "sawit" || plant === "kelapa sawit") { 
+                document.getElementById("resultSawit").style.display = "block";
+            } else if (plant === "Tembakau") {
+                document.getElementById("resultTembakau").style.display = "block";
+            } else if (plant === "Sawi") {
+                document.getElementById("resultSawi").style.display = "block";
+            } else if (plant === "Cabai") {
+                document.getElementById("resultCabai").style.display = "block";
+            } else if (plant === "Tomat") {
+                document.getElementById("resultTomat").style.display = "block";
+            } else if (plant === "Kopi") {
+                document.getElementById("resultKopi").style.display = "block";
+            } else if (plant === "Kakao") {
+                document.getElementById("resultKakao").style.display = "block";
+            } else if (plant === "Bawang Merah") {
+                document.getElementById("resultBawangMerah").style.display = "block";
+            } else if (plant === "BawangPutih") {
+                document.getElementById("resultBawangPutih").style.display = "block";
+            } else if (plant === "Jeruk") {
+                document.getElementById("resultJeruk").style.display = "block";
+            } else if (plant === "Kentang") {
+                document.getElementById("resultKentang").style.display = "block";
+            } else if (plant === "Ketela") {
+                document.getElementById("resultKetela").style.display = "block";
+            } else if (plant === "Pepaya") {
+                document.getElementById("resultPepaya").style.display = "block";
+            } else {
+                alert("Tanaman tidak ditemukan. Silakan masukkan tanaman yang valid.");
+            }
+        }
+    </script>
+
+    <script>
+    function toggleMenu() {
+    const menu = document.querySelector('.menu');
+    const content = document.querySelector('.content');
+    menu.classList.toggle('open');
+    content.classList.toggle('open');
+  }
+  </script>
+
+</body>
+</html>

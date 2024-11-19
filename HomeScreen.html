@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Screen</title>
+  <link rel="stylesheet" href="styleHS.css">
+</head>
+<style>
+  body{
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200vh;
+  }
+
+.iphone {
+  width: 375px; /* Lebar iPhone */
+  height: 610px; /* Tinggi iPhone */
+  border: 14px solid #000; /* Bingkai hitam */
+  border-radius: 36px; /* Sudut melengkung */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Bayangan */
+  position: relative;
+  background-color: #002b06; /* Warna latar belakang */
+  overflow: hidden; /* Menjaga konten tetap dalam bingkai */
+  }
+
+.camera {
+  width: 12px; /* Lebar kamera */
+  height: 12px; /* Tinggi kamera */
+  background-color: #000; /* Warna kamera */
+  border-radius: 50%; /* Membuatnya bulat */
+  position: absolute;
+  top: 15px; /* Posisi dari atas */
+  left: calc(50% - 6px); /* Tengah secara horizontal */
+  }
+
+.screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  position: relative;
+  padding-top: 30px; /* Memberi ruang untuk kamera */
+  }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #002b06; /* Forest Green */
+  margin: 20px auto;
+  background-image: url(GambarDaun2.png);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 15px;
+  color: white;
+  font-family: Monserrat;
+  border: 0.5px solid transparent;
+  padding: 10px 15px;
+  border-radius: 60px;
+  transition: transform .4s;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+}
+
+.notification-icon {
+  font-size: 20px;
+  background-color: #002b06;
+  background: #002b06;
+  border: 0.5px solid transparent;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: transform .4s;
+  cursor: pointer;
+}
+
+.notification-icon:hover {
+  transform: scale(1.1);
+}
+
+.containmenu {
+  width: 100%;
+  height: 0;
+}
+
+.menu {
+  width: 100%;
+  background-color: #0d771b;
+  position: sticky;
+  margin-top: 20px;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(230%);
+  z-index: 1;
+  border-radius: 20px;
+}
+
+.menu.open {
+  transform: translateX(120%);
+}
+
+.menu-toggle {
+  background-color: #002b06;
+  color: #fff;
+  border: 0.5px solid transparent;
+  padding: 10px 15px;
+  border-radius: 20px;
+  transition: transform .4s;
+  font-size: 20px;
+  cursor: pointer;
+}
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+
+.menu-items {
+  padding: 20px;
+}
+
+.menu-items a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.kpberita {
+  color: #fff;
+  font-family: Monserrat;
+  font-size: 16px;
+  margin-top: 15px;
+  margin-bottom: -5px;
+}
+
+.search-bar {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  height: 15px;
+  overflow: hidden;
+}
+
+.search-input {
+  width: 80%;
+  height: -5px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #000;
+}
+
+.search-icon {
+  width: 40px;
+  height: 200%;
+  display: flex;
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+  background-color: none;
+  color: #fff;
+  cursor: pointer;
+  margin-top: -7px;
+  background-image: url(SearchIcon.png);
+  background-size: 20px;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent repeating the image */
+  transition: transform .4s;
+}
+
+.search-icon:hover {
+  transform: scale(1.1);
+  background-color: none;
+}
+
+.search-icon i {
+  font-size: 30px;
+}
+
+.search-bar::placeholder {
+  color: #999;
+  text-align: center;
+}
+
+.content {
+  width: 100%;
+  padding: 20px;
+}
+
+.slider {
+  width: 100%;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  width: 80%;
+  height: 100px;
+  display: flex;
+  background-color: #9ed660;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10px;
+  left: 35px;
+  opacity: 0;
+  transition: opacity 1s ease;
+  border-radius: 10px;
+}
+
+.slide.active {
+  opacity: 2;
+  background-color: #9ed660;
+}
+
+.slide.slide-1{
+  background-image: url(GambarBerita.png);
+  background-size: cover; /* Stretch image to fit the slide */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent repeating the image */
+}
+
+.slide.slide-2 {
+  background-image: url(GambarBerita1.png);
+  background-size: cover; /* Stretch image to fit the slide */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent repeating the image */
+}
+
+.slide.slide-3 {
+  background-image: url(GambarBerita2.png);
+  background-size: cover; /* Stretch image to fit the slide */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent repeating the image */
+}
+
+.prev, .next {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  color: #9ed660;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.prev {
+  left: 7px;
+}
+
+.next {
+  right: 7px;
+}
+
+.dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #9ed660;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+background-color: #01430a;
+}
+
+
+.containDI {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.GambarBumi {
+  width: 125px;
+  height: 120px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px solid transparent;
+  border-radius: 10px;
+  transition: transform .4s;
+}
+
+.GambarBumi:hover {
+  transform: scale(1.1);
+}
+
+.GambarTanaman {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px solid transparent;
+  border-radius: 10px;
+  transition: transform .4s;
+}
+
+.GambarTanaman:hover {
+  transform: scale(1.1);
+}
+
+.box {
+  background-color: #FFFFE0;
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.box1 {
+  background-color: #FFFFE0;
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+}
+
+h2 {
+  margin-top: 60px;
+  font-size: 10px;
+}
+
+.GambarTujuh {
+  width: 100%; /* Mengatur lebar gambar menjadi 100% */
+  height: 200px; /* Tinggi otomatis untuk menjaga rasio aspek */
+  position: absolute; /* Memungkinkan penempatan di dalam bingkai */
+  bottom: 30px; /* Menempatkan gambar di bagian bawah */
+  left: 50%; /* Memusatkan gambar secara horizontal */
+  transform: translateX(-50%); /* Menggeser gambar ke kiri untuk memusatkan */
+  z-index: 0;
+}
+</style>
+<body>
+    <div class="iphone">
+        <div class="camera"></div> <!-- Elemen kamera -->
+        <div class="screen">
+        <div class="container">
+            <div class="header">
+              <div class="containmenu">
+                <div class="menu">
+                  <div class="menu-items">
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                    <a href="#">FAQ</a>
+                  </div> 
+                </div>
+              </div>
+              <a href="Tampilan_Awal.html">
+                <button class="back-button">Back</button>
+              </a>
+            <a href="Notification.html">
+              <button class="notification-icon">🔔</button>
+            </a>
+              <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            </div>
+
+    <div class="search-bar">
+      <input type="text" class="search-input" placeholder="Search...">
+      <div class="search-icon">
+          <i class="fas fa-search"></i>
+      </div>
+    </div>
+
+    <div class="kepalaberita">
+      <h1 class="kpberita">What's going on today?</h1>
+    </div>
+
+    <div class="slider">
+        <div class="slide slide-1 active"></div>
+        <div class="slide slide-2"></div>
+        <div class="slide slide-3"></div>
+        <div class="prev" onclick="changeSlide(-1)">&#10094;</div>
+        <div class="next" onclick="changeSlide(1)">&#10095;</div>
+        <div class="dots">
+          <div class="dot active" onclick="currentSlide(1)"></div>
+          <div class="dot" onclick="currentSlide(2)"></div>
+          <div class="dot" onclick="currentSlide(3)"></div>
+        </div>
+      </div>
+
+      <div class="containDI">
+          <a href="DataCuaca.html" alt="Box1">
+            <img src="BumiFix.png" alt="GambarBumi" class="GambarBumi">
+          </a>
+      
+          <a href="Information.html" alt="Box2">
+            <img src="TanamanFix.png" alt="GambarTanaman" class="GambarTanaman">
+          </a>
+        </div>
+      </div>
+
+      <div class="footer">
+        <img src="GambarTujuh.png" alt="GambarTujuh" class="GambarTujuh">
+      </div>
+
+      <script>
+      let slideIndex = 1;
+      showSlides(slideIndex);
+      
+      function changeSlide(n) {
+        showSlides(slideIndex += n);
+      }
+      
+      function currentSlide(n) {
+        showSlides(slideIndex = n);
+      }
+      
+      function showSlides(n) {
+        let slides = document.getElementsByClassName("slide");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (let i = 0; i < slides.length; i++) {
+          slides[i].style.opacity = "0";
+        }
+        for (let i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.opacity = "1";
+        dots[slideIndex - 1].className += " active";
+      }
+    </script>
+    <script>
+      function toggleMenu() {
+      const menu = document.querySelector('.menu');
+      const content = document.querySelector('.content');
+      menu.classList.toggle('open');
+      content.classList.toggle('open');
+    }
+    </script>
+  </div>
+</body>
+</html>
